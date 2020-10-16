@@ -24,6 +24,7 @@ import { _isHttpOrHttps } from '../../core/util/location';
 import { ApplicationVerifier } from '../../model/application_verifier';
 import { Auth } from '../../model/auth';
 import { _window } from '../auth_window';
+import { isWorker } from '../util/worker';
 import { Parameters, Recaptcha } from './recaptcha';
 import {
   MockReCaptchaLoaderImpl,
@@ -227,13 +228,6 @@ export class RecaptchaVerifier
     });
     return this.recaptcha;
   }
-}
-
-function isWorker(): boolean {
-  return (
-    typeof _window()['WorkerGlobalScope'] !== 'undefined' &&
-    typeof _window()['importScripts'] === 'function'
-  );
 }
 
 function domReady(): Promise<void> {
